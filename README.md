@@ -38,6 +38,9 @@ This project enables HR professionals to identify employees who are at risk of l
 - NumPy
 - Matplotlib
 - Scikit-learn
+- HTML
+- CSS
+- Java Script
 - MySQL
 - SQL
 - Microsoft Power BI
@@ -67,8 +70,17 @@ AI-HR-Analytics/
 ├── Report/
 │   └── Project_Report.pdf
 │
-├── PPT/
-│   └── Project_Presentation.pptx
+├── websites/
+│   └── employee.html
+│   └── index.html
+│   └──  login.html
+│   └── register.html
+│   └── style.css
+│   └── script.js
+├──Backend
+│   └──main.py
+│   └──requirement.txt
+│   └──employee_attrition model.pkl
 │
 └── README.md
 ```
