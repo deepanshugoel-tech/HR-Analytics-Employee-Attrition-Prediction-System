@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HR Analytics | Login</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+            🤖
+        </div>
+
+        <h1>HR Analytics</h1>
+
+        <p class="auth-subtitle">
+            AI-Powered Employee Attrition Prediction System
+        </p>
+
+        <h2>Login</h2>
+
+        <form id="loginForm">
+
+            <label for="loginEmail">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label for="loginPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit" class="auth-btn">
+                Login
+            </button>
+
+        </form>
+
+        <p id="loginMessage" class="auth-message"></p>
+
+        <p class="auth-switch">
+            Don't have an account?
+            <a href="register.html">
+                Create Account
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+document
+    .getElementById("loginForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const email = document
+            .getElementById("loginEmail")
+            .value
+            .trim()
+            .toLowerCase();
+
+        const password = document
+            .getElementById("loginPassword")
+            .value;
+
+        const message =
+            document.getElementById("loginMessage");
+
+        // Get all registered users
+        const users = JSON.parse(
+            localStorage.getItem("hrUsers") || "[]"
+        );
+
+        // Find matching account
+        const user = users.find(function(item) {
+
+            return (
+                item.email.trim().toLowerCase() === email &&
+                item.password === password
+            );
+
+        });
+
+        // Account not found
+        if (!user) {
+
+            message.textContent =
+                "❌ Invalid email or password.";
+
+            message.className =
+                "auth-message error";
+
+            return;
+        }
+
+        // Save current logged-in user
+        localStorage.setItem(
+            "loggedInUser",
+            JSON.stringify(user)
+        );
+
+        message.textContent =
+            "✅ Login successful!";
+
+        message.className =
+            "auth-message success";
+
+        // Redirect according to role
+        setTimeout(function() {
+
+            if (user.role === "HR") {
+
+                window.location.href = "index.html";
+
+            } else if (user.role === "Employee") {
+
+                window.location.href = "employee.html";
+
+            }
+
+        }, 500);
+
+    });
+
+</script>
+
+</body>
+</html>
